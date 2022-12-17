@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+<!--Crispfy Tags-->
+{% load crispy_forms_tags %}
+
+<!--title-->
+{% block title %}batch{% endblock title %}
+
+{% block sidebar-content %}
+<!--Welcome Notee-->
+<center>
+    Welcome : <span class="text-success"><strong>{{ user.get_username }}</strong></span>
+    <br><br>
+   </center>
+<a class='btn btn-outline-danger btn-sm' data-bs-toggle="modal" data-bs-target="#logoutModal">
+    Logout
+</a>
+<a href={% url 'admin:index' %} target="__blank" class='btn btn-outline-success btn-sm'>
+    Admin
+</a>
+{% endblock sidebar-content %}
+<!--Page content-->
+{% block content %}
+  
+<div class="form-group">
+    <div class="col-md-10 offset-md-1 mt-5">
+        <div class="bg-secondary text-white p-5 my-3">
+            <h3 class="display-4">Enter Batch Details</h3>
+            <hr class="my-4">
+
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div>
+                    {{form.batch|as_crispy_field}}
+                </div>
+                <div>
+                    {{form.DateOfAdmission|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-success btn-lg my-3"><i class="fas fa-database">Submit</i></button>
+                <a href="{% url 'list' %}" class="btn btn-dark btn-lg" style="margin-left:2px" title="Back"><i class="fas fa-stream"></i>Back to List</a>
+            </form>
+          </div>
+    </div>
+</div>
+{% endblock  %}

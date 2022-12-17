@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+<!--Crispfy Tags-->
+
+<!--title-->
+{% block title %}AddStudents{% endblock title %}
+
+{% block sidebar-content %}
+<!--Welcome Notee-->
+<center>
+    Welcome : <span class="text-success"><strong>{{ user.get_username }}</strong></span>
+    <br><br>
+   </center>
+<a class='btn btn-outline-danger btn-sm' data-bs-toggle="modal" data-bs-target="#logoutModal">
+    Logout
+</a>
+<a href={% url 'admin:index' %} target="__blank" class='btn btn-outline-success btn-sm'>
+    Admin
+</a>
+{% endblock sidebar-content %}
+<!--Page content-->
+{% block content %}
+  
+<div class="container my-3">
+    <div class="bg-secondary text-white p-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Add Student manually</h3>
+                <a href="{% url 'singlestudent' %} " class="btn btn-success bg-lg">Add single student</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <h3 class="">Upload CSV File</h3>
+                <a href="{% url 'upload-csv' %}"  class="btn btn-success bg-lg text-center">UploadFile</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

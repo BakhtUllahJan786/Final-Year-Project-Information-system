@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+<!--title-->
+{% block title %}student{% endblock title %}
+
+{% block sidebar-content %}
+<!--Welcome Notee-->
+<center>
+    Welcome : <span class="text-success"><strong>{{ user.get_username }}</strong></span>
+    <br><br>
+   </center>
+<a class='btn btn-outline-danger btn-sm' data-bs-toggle="modal" data-bs-target="#logoutModal">
+    Logout
+</a>
+<a href={% url 'admin:index' %} target="__blank" class='btn btn-outline-success btn-sm'>
+    Admin
+</a>
+{% endblock sidebar-content %}
+<!--Page content-->
+{% block content %}
+
+<div class="container-fluid mt-3" style="width:90% ;">
+    <!--Global Search -->
+<!--
+<form autocomplete='off'>
+    <div class="input-group input-group-sm mt-3" width="8">
+     <input type="text" name="q" class="form-control input-sm" placeholder="Search for...">
+     <button class="btn btn-secondary" title="seach"><i class="fas fa-search"></i></button>
+     <a href="{% url 'list' %}" class="btn btn-dark" style="margin-left:2px" title="Refresh"><i class="fas fa-sync-alt"></i></a>
+    </div>
+ </form>
+-->
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <form action="" method="get">
+                {{myfilter.form}}
+                <button class="btn btn-primary" type="submit">Search</button>
+                <a href="{% url 'list' %}" class="btn btn-dark" style="margin-left:2px" title="Refresh"><i class="fas fa-sync-alt"></i></a>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+ <div class="col-lg-12">
+    <div style="margin-top:5px;">
+        <table class="table table-sm">
+            <thead class="table-secondary">
+                <tr>
+                    <th style="width: 10%;">Roll No</th>
+                    <th style="width: 10%;">Batch No</th>
+                    <th style="width: 16%;">Name</th>
+                    <th style="width: 11%;">Section</th>
+                    <th style="width: 12%;">Project Status</th>
+                    <th style="width: 10%;">Gender</th>
+                    <th style="width: 10%;">Dues</th>
+                    <th style="width: 16%;">Remarks</th>
+                    <th colspan="2" style="width:10%;text-align:center">Action</th>
+                </tr>
+            </thead>
+
+            <!--Dataa from Backend-->
+            {% for st in student %}
+            <tr>
+                <td>{{st.roll_number}}</td>
+                <td>{{st.batch_no }}</td>
+                <td>{{st.name}}</td>
+                <td>{{st.section}}</td> 
+                <td>{{st.projet_status}}</td> 
+                <td>{{st.gender}}</td>
+                <td>
+                        <div class="form-check">
+                            {% if st.dues == True %}
+                            <input class="form-check-input" type="checkbox" value="" checked>
+                           {% else %}
+                            <input class="form-check-input" type="checkbox" value="">
+                            {% endif %}            
+                        </div>
+                 
+                </td>
+                <td>{{st.remarks}}</td>
+                <td>
+                    <a href="{% url 'delete' st.id %}" class="btn btn-danger btn-sm btn-action" title="Delete student">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'update' st.id %}" class="btn btn-success btn-sm" title="update student">
+                        update
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+            <!--DELETE MODALS-->
+            {% include 'modals/delete.html' %}
+
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <nav>
+            {% if student.has_other_pages %}
+            <ul class='pagination'>
+                {% if student.has_previous %}
+                <a href='?page=1' class='btn btn-outline-secondary mb-4' style='border-radius:1px;border:solid #d3d3d3;'>First</a>
+                <li class='page-item'><a class='page-link' href="?page={{ student.previous_page_number }}"><i class='fas fa-angle-double-left'></i></a></li>
+               {% else %}
+               <li class='page-item disabled'></li> 
+                {% endif %}
+        
+                {% for i in student.paginator.page_range %}
+                {% if student.number == i %}
+                <li class='page-item active'><span class='page-link'>{{i}}<span class='sr-only'></span></span></li> 
+                {% else %}
+                <li class='page-item'><a class='page-link' href="?page={{ i }}">{{i}}</a></li> 
+                {% endif %}
+                {% endfor %}
+        
+        
+                {% if student.has_next %}
+                <li class='page-item'><a class='page-link' href="?page={{ student.next_page_number }}"><i class='fas fa-angle-double-right'></i></a></li>
+                <a href='?page={{ student.paginator.num_pages }}' class='btn btn-outline-secondary mb-4' style='border-radius:1px;border: solid #d3d3d3;border-left:none'>Last</a>
+                {% else %}
+                <li class='page-item disabled'></li>  
+                {% endif %}
+            </ul>
+            {% endif %}
+        </nav>
+    </div>
+    <div class="col-md-4 container">
+        <div class='btn-holder'>
+        <a class="btn btn-primary btn-lg btn-block" href="{% url 'export' %}">Download File</a>
+        </div>    
+    </div>
+</div>
+
+
+</div>
+
+{% endblock  %}

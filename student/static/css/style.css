@@ -1,0 +1,144 @@
+/* ==============
+START CONFIGURATION
+*/
+html,
+body{
+    height: 100%;
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+
+}
+/* ==============
+FOOTER
+================*/
+.wrapper{
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+#footer,
+.push{
+    height: 50px;
+}
+
+/* ==============
+NavBAR
+================*/
+#btn-nav{
+
+    float: right;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+/* ==============
+LOGIN
+================*/
+#card-login{
+    width: 450px;
+}
+.login-border{
+    border-top: .4rem solid #198754;
+    border-bottom: .4rem solid #198754;
+    border-radius: 10px;
+
+}
+#btn-enter{
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+
+/* ==============
+BOOTSTRAP(FROM GREEN THEME)
+================*/
+.form-control:focus{
+    border-color: green;
+    -webkit-box-shadow:none;
+    box-shadow: none;
+}
+
+.btn:focus,.btn-active{
+    outline: none;
+    box-shadow:none
+
+}
+
+.form-check-input:checked{
+    background-color:#8abaae;
+    border: green !important;
+    box-shadow:0 0 8px rgba(1, 152, 117, 0.4) !important;
+}
+.form-check-input{
+    border: green !important;
+    box-shadow:0 0 8px rgba(1, 152, 117, 0.4) !important;
+
+}
+
+.form-switch .form-check-input:focus{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='grey'/%3e%3c/svg%3e");
+}
+
+
+
+
+/* ==============
+LOGOUT
+================*/
+.btn-modal{
+    width: 70px;
+}
+
+
+/* ==============
+DELETE BUTTON in  table
+================*/
+.btn-action{
+    width: 45px;
+}
+
+
+
+
+/* ==============
+PAGINATION
+================*/
+.page-item.active .page-link{
+    columns: #fff;
+    background-color:#6c757d;
+    border:1px solid #6c757d;
+}
+
+.pagination>li>a{
+    background-color:#fff;
+    color: #6c757d;
+}
+
+.pagination > li> a:focus,
+.pagination > li > a:hover,
+.pagination > span >a:focus,
+.pagination >span > a:hover
+{
+    color:#111;
+    background-color:#d3d3d3;
+    border:1px solid #6c757d;
+    box-shadow:none
+}
+
+
+.custom-control-label:before{
+    background-color:red;
+  }
+  .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color:black;
+  }
+
+/*================
+Button alignment
+*/
+.right-shift{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 100px;
+  }
